@@ -32,7 +32,7 @@ contract MyTokenTest is Test {
     function testTransfer() public {
         uint256 transferAmount = 1000;
 
-        vm.prank(owner); 
+        vm.prank(owner);
         myToken.transfer(addr1, transferAmount);
 
         assertEq(myToken.balanceOf(addr1), transferAmount);
@@ -76,7 +76,6 @@ contract MyTokenTest is Test {
     }
 
     function testApproveAndCall() public {
-        
         address recipient = address(new RecipientMock());
 
         uint256 approveAmount = 1000;
@@ -85,7 +84,6 @@ contract MyTokenTest is Test {
         vm.prank(owner);
         myToken.approveAndCall(recipient, approveAmount, extraData);
 
-        
         RecipientMock recipientContract = RecipientMock(recipient);
         assertEq(recipientContract.lastApprovalSender(), owner);
         assertEq(recipientContract.lastApprovalValue(), approveAmount);
@@ -130,5 +128,4 @@ contract MyTokenTest is Test {
         vm.prank(addr1);
         myToken.burnFrom(owner, burnAmount);
     }
-
 }
